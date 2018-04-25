@@ -6,6 +6,7 @@ from base.CommandDefinition_class import CommandDefinition
 
 import SSE
 
+
 class Main:
 
     def __init__(self):
@@ -15,10 +16,10 @@ class Main:
         self.definitions = self.init_definitions(definitions)
         for defi in self.definitions:
             print(defi)
-    
+
     def parse_arguments(self):
         pass
-    
+
     def init_definitions(self, definitions):
         re_defs = list()
         for definition in definitions:
@@ -34,7 +35,6 @@ class Main:
                 for error in result:
                     print(error)
         return re_defs
-
 
     def init_definition(self, definition):
         def_type = definition["type"]

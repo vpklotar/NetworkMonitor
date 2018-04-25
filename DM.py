@@ -1,18 +1,25 @@
-hosts = list()
-services = list()
+"DefinitionManager"
+definitions = list()
+
 
 def register(instance):
-    global hosts
-    global services
-    if instance.get('type') == "host":
-        hosts.append(instance)
-    elif instance.get('type') == "service":
-        services.append(instance)
+    "Will register a definition to to DM"
+    global definitions
+    definitions.append(instance)
 
-def get_host(name):
-    global hosts
-    """Will return a host with the given name if it is registed"""
-    for host in hosts:
-        if host.get('host_name') == name:
-            return host
-    return None
+
+def all(self):
+    "Returns all definitions"
+
+
+def filter(**args):
+    "Will return all the definitions matching the arguments given"
+    global definitions
+    return_list = list()
+    for definition in definitions:
+        for key, value in args.items():
+            if definition.get(key) != value:
+                break
+        else:
+            return_list.append(definition)
+    return return_list
