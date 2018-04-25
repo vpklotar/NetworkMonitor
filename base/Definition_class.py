@@ -89,7 +89,7 @@ class Definition:
             error_list.extend(self.pre_sanity_check())
             if self.get("register") == 1:
                 for field in self.requiered_fields:
-                    if field not in self.all_settings():
+                    if field not in self.settings:
                         error_list.append("'%s' is not set!" % field)
             self.error_list = error_list
             self.sanity_check_run = True
