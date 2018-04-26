@@ -7,4 +7,5 @@ install:
 script:
   - pytest DM.py
 after_success:
+  - mkdir coverage
   - codecov --file coverage/lcov.info --disable search
