@@ -3,6 +3,6 @@ python:
   - "3.6"
   - "3.6.5"
 install:
-  - pip3 install unittest
+  - pip3 -r requirements.txt
 script:
   - pytest DM.py
