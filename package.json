@@ -1,5 +1,8 @@
 {
     "scripts": {
         "test": "./node_modules/.bin/istanbul cover ./node_modules/tape/bin/tape ./test/*.js"
+    },
+    "devDependencies": {
+        "istanbul": "^0.4.5"
     }
 }

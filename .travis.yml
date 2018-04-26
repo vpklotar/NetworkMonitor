@@ -6,6 +6,3 @@ install:
   - pip3 install -r requirements.txt
 script:
   - pytest DM.py
-after_success:
-  - node ./node_modules/.bin/istanbul cover DM.py
-  - codecov
