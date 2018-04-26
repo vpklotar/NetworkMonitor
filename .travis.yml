@@ -8,4 +8,4 @@ script:
   - pytest DM.py
 after_success:
   - mkdir -p coverage
-  - codecov --file coverage/lcov.info --disable search
+  - codecov -t 098a3317-e908-4030-a90c-4fad5c45ad68 --file coverage/lcov.info --disable search
