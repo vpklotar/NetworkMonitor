@@ -8,8 +8,8 @@ class CommandDefinition(Definition):
 
     def __init__(self, settings_dict):
         super().__init__(settings_dict)
-        self.add_requiered_field('command_name')
-        self.add_requiered_field('command_line')
+        self.set_requiered_field('command_name')
+        self.set_requiered_field('command_line')
 
     def pre_sanity_check(self):
         return_list = list()

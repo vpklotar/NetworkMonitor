@@ -105,11 +105,11 @@ class Definition:
             self.sanity_check()
         return self.sanity_check_ok_bool
 
-    def add_requiered_field(self, field):
+    def set_requiered_field(self, field):
         """Register a field that is requiered for this definition"""
         self.requiered_fields.append(field)
 
-    def add_default_value(self, key, value):
+    def set_default(self, key, value):
         """Add a default value to the register"""
         self.default_settings[key] = value
 

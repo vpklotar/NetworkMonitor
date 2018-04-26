@@ -3,7 +3,6 @@ from config import read_config_files
 from base.ServiceDefinition_class import ServiceDefinition
 from base.HostDefinition_class import HostDefinition
 from base.CommandDefinition_class import CommandDefinition
-
 import SSE
 
 
