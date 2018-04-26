@@ -6,3 +6,7 @@ install:
   - pip3 install -r requirements.txt
 script:
   - pytest DM.py
+before_install:
+  - pip install --user codecov
+after_success:
+  - codecov --file coverage/lcov.info --disable search
