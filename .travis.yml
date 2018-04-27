@@ -5,6 +5,6 @@ python:
 install:
   - pip3 install -r requirements.txt
 script:
-  - pytest tests.py
+  - codecov run tests.py
 after_success:
   - codecov
