@@ -1,2 +1,2 @@
 # NetworkMonitor
-[![Build Status](https://travis-ci.org/vpklotar/NetworkMonitor.png?branch=master)](https://travis-ci.org/vpklotar/NetworkMonitor)
+[![Build Status](https://travis-ci.org/vpklotar/NetworkMonitor.png?branch=master)](https://travis-ci.org/vpklotar/NetworkMonitor) [![codecov.io Code Coverage](https://img.shields.io/codecov/c/github/vpklotar/NetworkMonitor.svg?maxAge=2592000)](https://codecov.io/gh/vpklotar/NetworkMonitor?branch=master)
