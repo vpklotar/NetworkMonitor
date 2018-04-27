@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import DM
 from base.Definition_class import Definition
 import unittest
@@ -146,8 +147,32 @@ class Definition_test(unittest.TestCase):
         d.set_requiered_field('name')
         d.sanity_check()
         self.assertEqual(d.sanity_check_ok(), True)
+    
+    def test_sanity_check_ok_3(self):
+        d = Definition({'register': 1, 'name': 'test'})
+        d.set_requiered_field('name')
+        self.assertEqual(d.sanity_check_ok(), True)
+    
+    def test_sanity_check_ok_4(self):
+        d = Definition({'register': 1})
+        d.set_requiered_field('name')
+        self.assertEqual(d.sanity_check_ok(), False)
 
-
+    def test_load_defaults_1(self):
+        d = Definition()
+        d.set_default('name', 'test')
+        d.load_defaults()
+        self.assertEqual(d.settings, {'name': 'test'})
+    
+    def test_load_defaults_2(self):
+        d = Definition({'name': 'test'})
+        d.set_default('name', 'This is a test')
+        d.load_defaults()
+        self.assertEqual(d.settings, {'name': 'test'})
+    
+    def test_inheritance(self):
+        d = Definition()
+        self.assertEqual(d.load_inheritance(), None)
 
 
 if __name__ == '__main__':

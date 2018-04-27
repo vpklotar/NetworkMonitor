@@ -112,6 +112,3 @@ class Definition:
     def set_default(self, key, value):
         """Add a default value to the register"""
         self.default_settings[key] = value
-
-    def get_name(self):
-        return self.__str__()
