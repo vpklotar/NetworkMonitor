@@ -189,6 +189,10 @@ class SSE_test(unittest.TestCase):
         SSE.register_substitiution("name", "test")
         self.assertEqual(SSE.substitue("Host $name$"), "Host test")
 
+    def test_substitute_custom(self):
+        SSE.register_substitiution("name", "test")
+        self.assertEqual(SSE.substitue("Host $name$", {"name": "host"}), "Host host")
+
 
 if __name__ == '__main__':
     unittest.main()
