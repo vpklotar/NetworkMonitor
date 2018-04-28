@@ -2,6 +2,7 @@
 import DM
 import SSE
 from base.Definition_class import Definition
+from base.CommandDefinition_class import CommandDefinition
 import unittest
 
 
@@ -93,50 +94,50 @@ class Definition_test(unittest.TestCase):
         d = Definition({})
         d.load_settings({'name': 'test'})
         self.assertEqual(d.settings, {'name': 'test'})
-    
+
     def test_load_settings_2(self):
         d = Definition({'name': 'test'})
         d.load_settings({'name': 'This is a test name'})
         self.assertEqual(d.settings, {'name': 'test'})
-    
+
     def test_load_settings_3(self):
         d = Definition({'name': 'test'})
         d.load_settings({'name': 'This is a test name'}, override=True)
         self.assertEqual(d.settings, {'name': 'This is a test name'})
-    
+
     def test_has_1(self):
         d = Definition({'name': 'test'})
         self.assertEqual(d.has('name'), True)
-    
+
     def test_has_2(self):
         d = Definition({})
         self.assertEqual(d.has('name'), False)
-    
+
     def test_register(self):
         d = Definition({'name': 'test'})
         d.register()
         self.assertEqual(DM.filter(name='test').pop(), d)
-    
+
     def test_set_requiered_field(self):
         d = Definition()
         d.set_requiered_field('name')
         self.assertEqual(d.requiered_fields, ['name'])
-    
+
     def test_sanity_check_1(self):
-        d = Definition({'name': 'test'})
+        d = Definition({'register': 1, 'name': 'test'})
         d.set_requiered_field('name')
         self.assertEqual(d.sanity_check(), [])
-    
+
     def test_sanity_check_2(self):
         d = Definition()
         d.set_requiered_field('name')
         self.assertEqual(len(d.sanity_check()), 0)
-    
+
     def test_sanity_check_3(self):
         d = Definition({'register': 1})
         d.set_requiered_field('name')
         self.assertEqual(len(d.sanity_check()), 1)
-    
+
     def test_sanity_check_ok_1(self):
         d = Definition({'register': 1})
         d.set_requiered_field('name')
@@ -148,12 +149,12 @@ class Definition_test(unittest.TestCase):
         d.set_requiered_field('name')
         d.sanity_check()
         self.assertEqual(d.sanity_check_ok(), True)
-    
+
     def test_sanity_check_ok_3(self):
         d = Definition({'register': 1, 'name': 'test'})
         d.set_requiered_field('name')
         self.assertEqual(d.sanity_check_ok(), True)
-    
+
     def test_sanity_check_ok_4(self):
         d = Definition({'register': 1})
         d.set_requiered_field('name')
@@ -164,35 +165,58 @@ class Definition_test(unittest.TestCase):
         d.set_default('name', 'test')
         d.load_defaults()
         self.assertEqual(d.settings, {'name': 'test'})
-    
+
     def test_load_defaults_2(self):
         d = Definition({'name': 'test'})
         d.set_default('name', 'This is a test')
         d.load_defaults()
         self.assertEqual(d.settings, {'name': 'test'})
-    
+
     def test_inheritance(self):
         d = Definition()
         self.assertEqual(d.load_inheritance(), None)
-    
+
     def test___str__(self):
         d = Definition()
         self.assertNotEqual(d.__str__(), None)
+
 
 class SSE_test(unittest.TestCase):
 
     def test_register_substitiute(self):
         SSE.register_substitiution("name", "test")
         self.assertEqual(SSE.substitution_dict, {"name": "test"})
-    
+
     def test_substitute(self):
         SSE.register_substitiution("name", "test")
         self.assertEqual(SSE.substitue("Host $name$"), "Host test")
 
     def test_substitute_custom(self):
         SSE.register_substitiution("name", "test")
-        self.assertEqual(SSE.substitue("Host $name$", {"name": "host"}), "Host host")
+        self.assertEqual(SSE.substitue(
+            "Host $name$", {"name": "host"}), "Host host")
 
+
+class CommandDefinition_test(unittest.TestCase):
+    def test_sanity_check_1(self):
+        c = CommandDefinition({"register": 1})
+        self.assertFalse(c.sanity_check_ok())
+    
+    def test_sanity_check_2(self):
+        c = CommandDefinition({"register": 1, "command_name": "test"})
+        self.assertFalse(c.sanity_check_ok())
+    
+    def test_sanity_check_3(self):
+        c = CommandDefinition({"register": 1, "command_line": "test"})
+        self.assertFalse(c.sanity_check_ok())
+
+    def test_sanity_check_4(self):
+        c = CommandDefinition({"command_name": "test", "command_line": "tests.py"})
+        self.assertTrue(c.sanity_check_ok())
+    
+    def test_get_name(self):
+        c = CommandDefinition({"command_name": "test", "command_line": "tests.py"})
+        self.assertEqual(c.get_name(), c.get('command_name'))
 
 if __name__ == '__main__':
     unittest.main()

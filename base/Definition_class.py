@@ -64,6 +64,8 @@ class Definition:
         re_string = ""
         for key, value in self.settings.items():
             re_string += "%-30s: %s\n" % (key, value)
+        re_string += "Required fields for this object: "
+        re_string += self.requiered_fields.__str__()
         return re_string
 
     def register(self):

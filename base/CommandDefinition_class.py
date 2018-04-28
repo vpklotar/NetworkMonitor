@@ -6,10 +6,12 @@ import SSE
 class CommandDefinition(Definition):
     """This contains all the nessecary information and functions for a host-definition"""
 
-    def __init__(self, settings_dict):
+    def __init__(self, settings_dict = {}):
         super().__init__(settings_dict)
         self.set_requiered_field('command_name')
         self.set_requiered_field('command_line')
+        self.set_default("register", 1)
+        self.load_defaults()
 
     def pre_sanity_check(self):
         return_list = list()

@@ -13,11 +13,11 @@ class HostDefinition(Definition):
         self.add_defaults()
 
     def add_defaults(self):
-        self.set_default_value('check_period', '24x7')
-        self.set_default_value('notification_interval', '60')
-        self.set_default_value('notification_period', '24x7')
-        self.set_default_value('contacts', '')
-        self.set_default_value('contact_groups', 'admins')
+        self.set_default('check_period', '24x7')
+        self.set_default('notification_interval', '60')
+        self.set_default('notification_period', '24x7')
+        self.set_default('contacts', '')
+        self.set_default('contact_groups', 'admins')
         self.load_defaults()
 
     def load_inheritance(self):
