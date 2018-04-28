@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import DM
+import SSE
 from base.Definition_class import Definition
 import unittest
 
@@ -173,6 +174,20 @@ class Definition_test(unittest.TestCase):
     def test_inheritance(self):
         d = Definition()
         self.assertEqual(d.load_inheritance(), None)
+    
+    def test___str__(self):
+        d = Definition()
+        self.assertNotEqual(d.__str__, None)
+
+class SSE_test(unittest.TestCase):
+
+    def test_register_substitiute(self):
+        SSE.register_substitiution("name", "test")
+        self.assertEqual(SSE.substitution_dict, {"name": "test"})
+    
+    def test_substitute(self):
+        SSE.register_substitiution("name", "test")
+        self.assertEqual(SSE.substitue("Host $name$"), "Host test")
 
 
 if __name__ == '__main__':
