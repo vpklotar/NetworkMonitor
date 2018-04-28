@@ -177,7 +177,7 @@ class Definition_test(unittest.TestCase):
     
     def test___str__(self):
         d = Definition()
-        self.assertNotEqual(d.__str__, None)
+        self.assertNotEqual(d.__str__(), None)
 
 class SSE_test(unittest.TestCase):
 
