@@ -4,6 +4,7 @@ from base.ServiceDefinition_class import ServiceDefinition
 from base.HostDefinition_class import HostDefinition
 from base.CommandDefinition_class import CommandDefinition
 import SSE
+import EM
 
 
 class Main:
@@ -13,8 +14,7 @@ class Main:
         self.parse_arguments()
         definitions = read_config_files('configs')
         self.definitions = self.init_definitions(definitions)
-        for defi in self.definitions:
-            print(defi)
+        EM.start()
 
     def parse_arguments(self):
         pass
@@ -30,7 +30,7 @@ class Main:
             definition.load_inheritance()
             result = definition.sanity_check()
             if len(result) > 0:
-                print("Errors for definition '%s'" % definition.get_name())
+                print("Error(s) in definition:")
                 for error in result:
                     print(error)
         return re_defs

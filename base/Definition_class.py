@@ -7,19 +7,22 @@ class Definition:
         """Initialize a defiition given the settings dictionary"""
         self.settings = settings
         self.own_settings_dict = settings
+        self.requieres_register_true = True
         self.requiered_fields = list()
         self.default_settings = {}
         self.sanity_check_run = False
         self.sanity_check_ok_bool = False
 
-    def get(self, name):
+    def get(self, name, default=None):
         """
         Get the value of a given setting and if it isn't explicitly set it will return the default
         """
         if name in self.settings:
             return self.settings[name]
-        else:
+        elif name in self.default_settings:
             return self.get_default(name)
+        else:
+            return default
 
     def get_default(self, name):
         """
@@ -89,7 +92,7 @@ class Definition:
         if self.sanity_check_run == False:
             error_list = list()
             error_list.extend(self.pre_sanity_check())
-            if self.get("register") == 1:
+            if (self.get("register") == 1 and self.requieres_register_true == True) or self.requieres_register_true == False:
                 for field in self.requiered_fields:
                     if field not in self.settings:
                         error_list.append("'%s' is not set!" % field)
@@ -97,8 +100,10 @@ class Definition:
             self.sanity_check_run = True
             if len(error_list) > 0:
                 self.sanity_check_ok_bool = False
+                self.set('sanity_check_ok', False)
             else:
                 self.sanity_check_ok_bool = True
+                self.set('sanity_check_ok', True)
         return self.error_list
 
     def sanity_check_ok(self):
